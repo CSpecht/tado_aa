@@ -12,7 +12,7 @@ from datetime import datetime
 from PyTado.interface import Tado
 
 def main():
-
+    
     global lastMessage
     global username
     global password
@@ -29,8 +29,10 @@ def main():
 
     #Settings
     #--------------------------------------------------
-    username = "your_tado_username" # tado username
-    password = "your_tado_password" # tado password
+    
+    
+    username = os.getenv('TADO_USR') # tado username from env
+    password = os.getenv('TADO_PW') # tado password from env
 
     checkingInterval = 10.0 # checking interval (in seconds)
     errorRetringInterval = 30.0 # retrying interval (in seconds), in case of an error
@@ -38,12 +40,13 @@ def main():
     maxTemp = 25 # maximum allowed temperature, applicable only if enableTempLimit is "TRUE"
     enableTempLimit = True # activate min and max temp limit with "True" or disable it with "False"
     enableLog = False # activate the log with "True" or disable it with "False"
-    logFile = "/l.log" # log file location
+    logFile = "l.log" # log file location
     enableLogRotation = False
     maxLines = 50 #log maximum number of lines
     #--------------------------------------------------
 
     login()
+    
     homeStatus()
     
 def login():
